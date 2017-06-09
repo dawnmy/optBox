@@ -81,7 +81,7 @@ def de(n_individuals=20,
 # the object function for optimization
 def evaluate_func(x):
     (a, b, c, d) = x
-    return(4 * a**2 - 3 * b + 5 * c**3 - 6 * d)
+    return(5 * a**3 - 3 * b + 7 * c**3 - 2 * d)
 
 def main():
     de()
