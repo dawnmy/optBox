@@ -29,8 +29,9 @@ type DE struct {
 	M          float64Data
 }
 
+// Initialize the population
 func InitPop(SetParameter Parameter) float64Mat {
-	//n := SetParameter.NumV
+
 	p := SetParameter.NumI
 	xl := SetParameter.XLower
 	xu := SetParameter.XUpper
@@ -46,22 +47,19 @@ func InitPop(SetParameter Parameter) float64Mat {
 	return xall
 }
 
-func Mutation() {
+func Mutation(population *float64Mat) {
 
 }
 
-func Crossover() {
+func Crossover(individual *float32Data) {
 
 }
 
-func Selection() {
+func Selection(individual *float32Data) {
 
 }
 
-func ObjFuc() {
-}
-
-func objFunc(x []float64) float64 {
+func objFunc(x float64Data) float64 {
 	return 2*x[0]*x[0] - x[1]*x[1] + 3
 }
 
