@@ -50,7 +50,11 @@ func initPop(setParameter Parameter) float64Mat {
 }
 
 // Mutation for evolution
-func mutation(gGeneration float64Mat, individual int, f float64, xLower float64Data, xUpper float64Data) float64Data {
+func mutation(gGeneration float64Mat,
+	individual int,
+	f float64,
+	xLower float64Data,
+	xUpper float64Data) float64Data {
 	// depletion of the the old current individual
 	gWithOutI := make(float64Mat, individual)
 	copy(gWithOutI, gGeneration[:individual])
@@ -82,7 +86,9 @@ func mutation(gGeneration float64Mat, individual int, f float64, xLower float64D
 }
 
 // Recombination of chromosomes of individual
-func crossover(individual *float64Data, cr float64, mutatedIndividual float64Data) {
+func crossover(individual *float64Data,
+	cr float64,
+	mutatedIndividual float64Data) {
 	n := len(*individual)
 	vi := make(float64Data, n)
 	for i, j := range mutatedIndividual {
@@ -103,7 +109,9 @@ func crossover(individual *float64Data, cr float64, mutatedIndividual float64Dat
 }
 
 // Alternative recombination function with return
-func crossover2(individual float64Data, cr float64, mutatedIndividual float64Data) float64Data {
+func crossover2(individual float64Data,
+	cr float64,
+	mutatedIndividual float64Data) float64Data {
 	n := len(individual)
 	vi := make(float64Data, n)
 	for i, j := range individual {
