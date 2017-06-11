@@ -66,13 +66,14 @@ def de(n_individuals=20,
         for i in range(n_individuals):
             # mutation
             mutated_i = mutation(x_all, i, f)
+            print(mutated_i)
             # check bounds for mutations
             h_i = check_bound(mutated_i, x_lower, x_upper)
             # generate new population
             x_all[i] = crossover(x_all[i], cr, h_i)
 
     evaluate_result = [evaluate_func(
-        x_all[i])for i in range(n_individuals)]
+        x_all[i]) for i in range(n_individuals)]
     best_x_i = x_all[np.argmin(evaluate_result)]
     print("The resulting values of the objective function of final generation: ",
           evaluate_result)
