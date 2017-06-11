@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Written by Z-L DENG
+# 11/06/2017
 
 import numpy as np
 
