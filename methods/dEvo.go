@@ -9,7 +9,7 @@ import (
 type float64Data []float64
 type float64Mat [][]float64
 
-// Set the parameters
+//Parameter holds the parameters for population, individual and DE
 type Parameter struct {
 	NumI   int         // Population size (number of individuals for each generation)
 	NumG   int         // Number of generations
@@ -38,7 +38,7 @@ func initPop(setParameter Parameter) float64Mat {
 	tmp := float64Data{}
 	for i := 0; i < ps; i++ {
 		tmp = float64Data{}
-		for j, _ := range xl {
+		for j := range xl {
 			// Randomization seed
 			rand.Seed(time.Now().UTC().UnixNano())
 			// Generation random individuals in the range of xl and xu
@@ -154,6 +154,7 @@ func objFunc(x float64Data) float64 {
 	return 5*math.Pow(x[0], 3) - 3*x[1] + 7*math.Pow(x[2], 3) - 2*x[3]
 }
 
+// DiffEvo invokes DE modules
 func DiffEvo(setParameter Parameter) float64Mat {
 	// '''
 	// NumI   int         // Population size (number of individuals for each generation)
