@@ -106,7 +106,6 @@ func crossover(individual *float64Data,
 	if old > new {
 		*individual = vi
 		return new
-
 	}
 	return old
 }
