@@ -1,6 +1,7 @@
 package methods
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"time"
@@ -88,7 +89,7 @@ func mutation(gGeneration float64Mat,
 // Recombination of chromosomes of individual
 func crossover(individual *float64Data,
 	cr float64,
-	mutatedIndividual float64Data) {
+	mutatedIndividual float64Data) float64 {
 	n := len(*individual)
 	vi := make(float64Data, n)
 	for i, j := range mutatedIndividual {
@@ -99,13 +100,15 @@ func crossover(individual *float64Data,
 			vi[i] = j
 		}
 	}
+
 	old := objFunc(*individual)
 	new := objFunc(vi)
 	if old > new {
 		*individual = vi
-	} else {
+		return new
 
 	}
+	return old
 }
 
 // Alternative recombination function with return
@@ -155,7 +158,9 @@ func objFunc(x float64Data) float64 {
 }
 
 // DiffEvo invokes DE modules
-func DiffEvo(setParameter Parameter) float64Mat {
+func DiffEvo(setParameter Parameter) (
+	minCostFinal float64,
+	minIndividualFinal float64Data) {
 	// '''
 	// NumI   int         // Population size (number of individuals for each generation)
 	// NumG   int         // Number of generations
@@ -171,15 +176,27 @@ func DiffEvo(setParameter Parameter) float64Mat {
 	xl := setParameter.XLower
 	xu := setParameter.XUpper
 	xall := initPop(setParameter)
+	var minIndexFinal int
 	for g := 0; g < ng; g++ {
+		var minCost float64
+		var minIndex int
+
 		for i := 0; i < ps; i++ {
 			mutatedIndividual := mutation(xall, i, f, xl, xu)
 			var x float64Data
 			x = xall[i]
 			//xall[i] = Crossover2(xall[i], cr, mutatedIndividual)
-			crossover(&x, cr, mutatedIndividual)
+			cost := crossover(&x, cr, mutatedIndividual)
 			xall[i] = x
+			if cost < minCost {
+				minCost = cost
+				minIndex = i
+			}
 		}
+		minIndexFinal = minIndex
+		minCostFinal = minCost
+		fmt.Println(minIndex, minCost)
 	}
-	return xall
+	minIndividualFinal = xall[minIndexFinal]
+	return minCostFinal, minIndividualFinal
 }
