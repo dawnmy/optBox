@@ -9,7 +9,7 @@ import (
 type float64Data []float64
 type float64Mat [][]float64
 
-//Parameter holds the parameters for population, individual and DE
+// Parameter holds the parameters for population, individual and DE
 type Parameter struct {
 	NumI   int         // Population size (number of individuals for each generation)
 	NumG   int         // Number of generations
